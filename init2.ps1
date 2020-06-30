@@ -34,12 +34,10 @@ function Add-MachineToDomain {
 
     $NewName = "GKE-$(Get-Random)"
     Write-Information "Adding machine $NewName to the domain and restarting" -InformationAction Continue
-    
-    Rename-Computer -NewName $NewName
 
     $psCred = Get-Credential
     Write-Information "Got credential"  -InformationAction Continue
-    Add-Computer -DomainName $DomainName -Credential $psCred -Restart -InformationAction Continue
+    Add-Computer -NewName $NewName -DomainName $DomainName -Credential $psCred -Restart -InformationAction Continue
   } else {
     Write-Information "Machine already part of domain" -InformationAction Continue
   }
